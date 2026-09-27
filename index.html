@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="英國 DVSA 路試考官英文指示聽力卡：聽英文發聲，揀返中文意思，包埋 Show me / Tell me 問題同錯題本。">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>路試英語聽力</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Noto+Sans+HK:wght@400;500;700;900&display=swap">
+<style>
+:root {
+  --ground: #EDF0F4;
+  --surface: #FFFFFF;
+  --surface-2: #F5F7FA;
+  --ink: #14202E;
+  --muted: #5A6778;
+  --line: #D5DCE5;
+  --sign: #1B4C9C;
+  --sign-ink: #FFFFFF;
+  --sign-soft: #DCE6F6;
+  --lred: #D52B1E;
+  --good: #0E7A45;
+  --good-bg: #E3F4EA;
+  --bad: #B8261B;
+  --bad-bg: #FBE7E5;
+  --focus: #F2A900;
+  --zh: "Noto Sans HK", "PingFang HK", "Microsoft JhengHei", sans-serif;
+  --en: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #0D131A; --surface: #151E29; --surface-2: #1B2633; --ink: #E5EBF2; --muted: #93A1B2;
+    --line: #2A3747; --sign: #1F54A8; --sign-soft: #1C2B42; --lred: #E4493D;
+    --good: #4CC98A; --good-bg: #13301F; --bad: #F07A6F; --bad-bg: #3A1A18;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #0D131A; --surface: #151E29; --surface-2: #1B2633; --ink: #E5EBF2; --muted: #93A1B2;
+  --line: #2A3747; --sign: #1F54A8; --sign-soft: #1C2B42; --lred: #E4493D;
+  --good: #4CC98A; --good-bg: #13301F; --bad: #F07A6F; --bad-bg: #3A1A18;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--ground); color: var(--ink);
+  font-family: var(--zh); font-size: 16px; line-height: 1.55;
+  padding-inline: 16px; padding-block: 20px 40px;
+}
+.wrap { max-width: 580px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.en { font-family: var(--en); }
+
+header { display: flex; align-items: center; gap: 14px; }
+.lplate {
+  flex: none; width: 48px; height: 48px; background: #fff; border: 2px solid #C9CFD6; border-radius: 6px;
+  display: grid; place-items: center; color: #D52B1E; font: 700 34px/1 var(--en);
+}
+header h1 { margin: 0; font-size: 22px; font-weight: 900; letter-spacing: .02em; text-wrap: balance; }
+header p { margin: 0; color: var(--muted); font-size: 14px; }
+
+.guide { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.guide summary { padding: 11px 14px; font-weight: 700; cursor: pointer; }
+.guide summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 12px; }
+.guide-body { padding: 0 16px 14px; font-size: 15px; }
+.guide h2 { font-size: 15px; font-weight: 900; margin: 6px 0 6px; }
+.guide ul { margin: 0 0 12px; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+.guide .n { font-family: var(--en); font-variant-numeric: tabular-nums; color: var(--muted); }
+.guide .note { margin: 0; color: var(--muted); font-size: 14px; }
+
+.tabs { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 4px; gap: 4px; }
+.tabs button { border: 0; background: transparent; padding: 9px 6px; border-radius: 7px; font-weight: 500; font-size: 15px; }
+.tabs button[aria-selected="true"] { background: var(--sign); color: var(--sign-ink); }
+.count { font-family: var(--en); font-variant-numeric: tabular-nums; font-size: 13px; opacity: .8; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button {
+  border: 1px solid var(--line); background: var(--surface); padding: 5px 11px; border-radius: 999px; font-size: 14px;
+}
+.chips button[aria-pressed="true"] { border-color: var(--sign); background: var(--sign-soft); color: var(--ink); font-weight: 700; }
+
+.progress { display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.progress b { color: var(--ink); font-family: var(--en); }
+
+/* the listening panel, styled like a UK direction sign */
+.sign {
+  position: relative; background: var(--sign); color: var(--sign-ink); border-radius: 14px;
+  padding: 22px 20px 20px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;
+}
+.sign::before { content: ""; position: absolute; inset: 7px; border: 2.5px solid rgba(255,255,255,.9); border-radius: 9px; pointer-events: none; }
+.sign .who { font-size: 13px; letter-spacing: .12em; opacity: .85; font-family: var(--en); text-transform: uppercase; }
+.sign .cat { font-size: 13px; opacity: .85; margin-top: -10px; }
+.play {
+  width: 84px; height: 84px; border-radius: 50%; border: 0; background: #fff; color: #1B4C9C;
+  display: grid; place-items: center; box-shadow: 0 3px 0 rgba(0,0,0,.18); position: relative; z-index: 1;
+}
+.play svg { width: 34px; height: 34px; margin-left: 5px; }
+.play.speaking { animation: pulse 1s ease-in-out infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 10px rgba(255,255,255,.25); } }
+@media (prefers-reduced-motion: reduce) { .play.speaking { animation: none; outline: 4px solid rgba(255,255,255,.5); } }
+.sign .text { font-family: var(--en); font-size: 21px; font-weight: 700; line-height: 1.35; min-height: 1.4em; text-wrap: balance; position: relative; z-index: 1; }
+.sign .text.hidden { font-family: var(--zh); font-weight: 400; font-size: 15px; opacity: .8; }
+
+.controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
+.controls button {
+  border: 1.5px solid rgba(255,255,255,.7); background: transparent; color: #fff; border-radius: 8px;
+  padding: 6px 12px; font-size: 14px;
+}
+.controls button[aria-pressed="true"] { background: #fff; color: #1B4C9C; font-weight: 700; }
+
+.options { display: flex; flex-direction: column; gap: 8px; }
+.opt {
+  display: flex; gap: 12px; align-items: flex-start; text-align: left; width: 100%;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 17px;
+}
+.opt:hover:not(:disabled) { border-color: var(--sign); }
+.opt .k { flex: none; width: 26px; height: 26px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--line); display: grid; place-items: center; font: 700 13px/1 var(--en); color: var(--muted); margin-top: 1px; }
+.opt:disabled { cursor: default; }
+.opt.right { border-color: var(--good); background: var(--good-bg); }
+.opt.right .k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.opt.wrong .k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt.dim { opacity: .55; }
+
+.feedback { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.verdict { font-weight: 900; font-size: 18px; }
+.verdict.ok { color: var(--good); } .verdict.no { color: var(--bad); }
+.tip { background: var(--surface-2); border-radius: 8px; padding: 10px 12px; font-size: 15px; }
+.tip b { display: block; font-size: 13px; color: var(--muted); letter-spacing: .04em; margin-bottom: 2px; }
+.next { align-self: stretch; border: 0; background: var(--ink); color: var(--ground); border-radius: 10px; padding: 12px; font-weight: 700; font-size: 16px; }
+
+.empty { background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 28px 18px; text-align: center; color: var(--muted); }
+
+.search { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); font: inherit; }
+.list { display: flex; flex-direction: column; gap: 8px; }
+.row { display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.row .mini { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--sign); color: #fff; display: grid; place-items: center; }
+.row .mini svg { width: 16px; height: 16px; margin-left: 2px; }
+.row .en { font-weight: 700; font-size: 16px; line-height: 1.35; }
+.row .zh { color: var(--ink); font-size: 15px; }
+.row .tip { margin-top: 6px; font-size: 14px; }
+.row .star { font-size: 12px; color: var(--bad); font-weight: 700; margin-left: 6px; font-family: var(--zh); }
+.group-h { font-size: 13px; color: var(--muted); letter-spacing: .06em; margin: 8px 0 -2px; font-weight: 700; }
+
+footer { display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+footer label { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+footer select { font: inherit; padding: 5px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); max-width: 100%; }
+.warn { background: var(--bad-bg); color: var(--bad); border-radius: 10px; padding: 10px 12px; font-size: 14px; }
+.testbtn { margin-top: 8px; border: 1.5px solid currentColor; background: transparent; color: inherit; border-radius: 8px; padding: 6px 12px; font-size: 14px; }
+.warn ol { margin: 4px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 3px; }
+.linkbtn { background: none; border: 0; padding: 0; color: var(--muted); text-decoration: underline; font-size: 14px; align-self: flex-start; }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="lplate" aria-hidden="true">L</div>
+    <div>
+      <h1>路試英語聽力</h1>
+      <p>英國 DVSA 路試：聽考官英文指示，揀返中文意思</p>
+    </div>
+  </header>
+
+  <details class="guide" id="guide">
+    <summary>使用說明</summary>
+    <div class="guide-body">
+      <h2>點樣用</h2>
+      <ul>
+        <li>撳藍色播放掣，就會用英國口音讀出考官嘅英文指示。之後嗰幾題會自動播。</li>
+        <li>喺 4 個中文答案入面揀一個，即時知對錯，同埋會顯示英文原句。</li>
+        <li>你可以揀「慢速」，亦可以揀喺答題之前先睇英文。</li>
+        <li>答錯嘅題目會自動收入「錯題」頁，之後可以淨係溫錯題。答啱咗就會自動移走。錯題紀錄只會存喺你部機嘅瀏覽器入面。</li>
+        <li>「溫習全部」頁可以逐句播放同搜尋，例如打 <span class="en">roundabout</span> 或者「迴旋處」。</li>
+        <li>頁底可以揀用邊把英文聲。預設係預先錄好嘅 Daniel 英國男聲，iPhone 都播到；想聽其他口音可以揀部機自帶嘅聲（iPhone / iPad 除外，因為播唔到）。</li>
+        <li>用電腦嘅話，可以用鍵盤：1–4 揀答案，空格鍵重播，Enter 去下一題。</li>
+      </ul>
+      <h2>內容（跟英國 DVSA 路試，共 <span id="gTotal"></span> 句）</h2>
+      <ul id="gCats"></ul>
+      <p class="note">冇聲？檢查吓手機係咪較咗靜音。喺 Claude app 入面開可能播唔到聲，請將連結貼去 Safari 或 Chrome 開。都唔得就去頁底揀「錄音：Daniel 英國男聲」。</p>
+    </div>
+  </details>
+
+  <div class="tabs" role="tablist">
+    <button id="tab-practice" role="tab" data-mode="practice">練習</button>
+    <button id="tab-wrong" role="tab" data-mode="wrong">錯題 <span class="count" id="wrongCount">0</span></button>
+    <button id="tab-browse" role="tab" data-mode="browse">溫習全部</button>
+  </div>
+
+  <div class="chips" id="chips"></div>
+
+  <div id="warn" class="warn" hidden>呢個瀏覽器唔支援發聲。請用 Safari 或 Chrome 開。</div>
+  <div id="audioHelp" class="warn" hidden>
+    <b>聽唔到聲？</b>
+    <ol>
+      <li>iPhone：將機側嘅靜音掣撥返有聲，再較大音量。</li>
+      <li>如果喺 Claude app 入面開，app 入面可能播唔到聲。複製呢個網頁嘅連結，貼去 Safari（iPhone）或者 Chrome（Android）開。</li>
+      <li>去頁底「英文聲音」揀返「錄音：Daniel 英國男聲」，再撳播放。</li>
+    </ol>
+    <button class="testbtn" id="testSound">用錄音試播一句</button>
+  </div>
+
+  <section id="practice">
+    <div class="wrap" style="max-width:none">
+      <div class="progress"><span>第 <b id="qNo">1</b> / <b id="qTotal">0</b> 題</span><span>答啱 <b id="score">0</b> / <b id="answered">0</b> · 連續 <b id="streak">0</b></span></div>
+      <div class="sign">
+        <div class="who">Examiner</div>
+        <div class="cat" id="qCat"></div>
+        <button class="play" id="play" aria-label="播放考官指示">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L7.5 3.64A1 1 0 0 0 6 4.5Z"/></svg>
+        </button>
+        <div class="text hidden" id="qText">撳播放，聽考官講咩</div>
+        <div class="controls">
+          <button id="slow" aria-pressed="false">慢速</button>
+          <button id="showEn" aria-pressed="false">答之前顯示英文</button>
+        </div>
+      </div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback" hidden>
+        <div class="verdict" id="verdict"></div>
+        <div id="fbText"></div>
+        <div class="tip" id="fbTip" hidden><b>點樣答／做</b><span></span></div>
+        <button class="next" id="next">下一題 →</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="noWrong" class="empty" hidden>未有錯題。去「練習」答錯嘅題目會自動收喺呢度。</section>
+
+  <section id="browse" hidden>
+    <div class="wrap" style="max-width:none">
+      <input class="search" id="search" type="search" placeholder="搜尋英文或中文，例如 roundabout / 迴旋處">
+      <div class="list" id="list"></div>
+    </div>
+  </section>
+
+  <footer>
+    <label for="voice">英文聲音 <select id="voice"><option value="rec">錄音：Daniel 英國男聲（推薦）</option></select></label>
+    <span id="diag">偵測緊英文聲…</span>
+    <div id="voiceHint" class="warn" hidden>如果冇聲，請轉返錄音聲。
+      <button class="testbtn" id="backToRec">轉返錄音：Daniel 英國男聲</button></div>
+    <span>鍵盤：1–4 揀答案 · 空格鍵重播 · Enter 下一題</span>
+    <button class="linkbtn" id="resetWrong">清除錯題紀錄</button>
+    <span id="resetMsg" hidden>已清除錯題紀錄。</span>
+  </footer>
+</div>
+
+<script>
+const CATS = [
+  { id: 'all', name: '全部' },
+  { id: 'start', name: '開考・完考' },
+  { id: 'dir', name: '方向指示' },
+  { id: 'stop', name: '停車・起步' },
+  { id: 'man', name: '泊車・倒車' },
+  { id: 'emg', name: '緊急停車' },
+  { id: 'ind', name: '獨立駕駛' },
+  { id: 'tell', name: 'Tell me 問題' },
+  { id: 'show', name: 'Show me 問題' },
+  { id: 'vocab', name: '常用詞彙' },
+];
+
+const CARDS = [
+  // 開考・完考
+  ['start', "Can I see your driving licence, please?", "可以睇吓你張駕駛執照嗎？"],
+  ['start', "Could you read the number plate on that car over there?", "請讀出嗰邊架車嘅車牌（視力測試）", "要讀到大約 20 米外嘅車牌，讀唔到即場唔合格。"],
+  ['start', "Would you like your instructor to come with you on the test?", "你想唔想教車師傅坐喺後面跟車？"],
+  ['start', "Please put your seatbelt on.", "請扣好安全帶"],
+  ['start', "Please follow the road ahead, unless traffic signs or road markings tell you otherwise.", "除非有交通標誌或路面標記，否則沿住條路一直行"],
+  ['start', "I'll give you directions in good time.", "我會預早俾指示你"],
+  ['start', "Do you have any questions before we start?", "開始之前有冇問題？"],
+  ['start', "That's the end of your test.", "考試完咗"],
+  ['start', "Please switch off the engine.", "請熄匙（關引擎）"],
+  ['start', "I'm pleased to tell you that you've passed.", "恭喜你，合格"],
+  ['start', "I'm sorry to tell you that you haven't passed this time.", "唔好意思，今次唔合格"],
+  ['start', "Would you like some feedback on your drive?", "你想唔想聽吓你今次揸車嘅評語？"],
+  ['start', "Would you like your instructor to listen to the feedback?", "你想唔想教車師傅一齊聽評語？"],
+
+  // 方向指示
+  ['dir', "Take the next road on the left, please.", "下一個路口轉左"],
+  ['dir', "Take the next road on the right, please.", "下一個路口轉右"],
+  ['dir', "Take the second road on the left.", "第二個路口轉左"],
+  ['dir', "Take the second road on the right.", "第二個路口轉右"],
+  ['dir', "At the end of the road, turn left.", "行到路尾轉左"],
+  ['dir', "At the end of the road, turn right.", "行到路尾轉右"],
+  ['dir', "At the traffic lights, turn right.", "喺紅綠燈轉右"],
+  ['dir', "At the traffic lights, go straight ahead.", "喺紅綠燈直行"],
+  ['dir', "At the roundabout, take the first exit. That's to the left.", "迴旋處第一個出口（即係轉左）"],
+  ['dir', "At the roundabout, take the second exit. That's straight ahead.", "迴旋處第二個出口（即係直行）"],
+  ['dir', "At the roundabout, take the third exit. That's to the right.", "迴旋處第三個出口（即係轉右）"],
+  ['dir', "At the roundabout, take the fourth exit. That's to go back the way we came.", "迴旋處第四個出口（即係掉頭行返轉頭）"],
+  ['dir', "At the mini-roundabout, go straight ahead.", "喺迷你迴旋處直行"],
+  ['dir', "Go all the way round the roundabout.", "喺迴旋處兜成個圈"],
+  ['dir', "Follow the road ahead.", "沿住條路一直行"],
+  ['dir', "Follow the road round to the left.", "跟住條路向左彎"],
+  ['dir', "At the junction, turn left.", "喺路口轉左"],
+  ['dir', "Take the next available road on the right.", "下一個可以轉嘅路口轉右"],
+  ['dir', "Turn left at the end of the road, then take the first right.", "路尾轉左，跟住第一個路口轉右"],
+  ['dir', "Get into the right-hand lane.", "轉入右邊條線"],
+  ['dir', "Keep to the left-hand lane.", "保持喺左邊條線"],
+  ['dir', "Continue along this road.", "繼續沿呢條路行"],
+
+  // 停車・起步
+  ['stop', "Please pull up on the left at the next safe place.", "喺下一個安全位置靠左停車"],
+  ['stop', "Pull up behind the blue car, please.", "喺藍色車後面停"],
+  ['stop', "Move off when you're ready.", "準備好就起步"],
+  ['stop', "Drive on when you're ready.", "準備好就繼續揸"],
+  ['stop', "Stop here, please.", "請喺呢度停"],
+  ['stop', "Please make the car secure.", "請將架車固定好（拉手掣、打空波）"],
+  ['stop', "Pull up close behind the parked car, then move off when you're ready.", "喺泊咗嘅車後面停近啲，然後準備好就起步（斜角起步）"],
+  ['stop', "I'd like you to move off on this hill.", "我想你喺呢個斜路起步"],
+
+  // 泊車・倒車
+  ['man', "Please pull up on the right-hand side of the road when it's safe to do so.", "安全嘅時候喺道路右邊停車"],
+  ['man', "Reverse back about two car lengths, keeping reasonably close to the kerb.", "倒後大約兩架車位，盡量貼近路邊石"],
+  ['man', "Now rejoin the traffic when you're ready.", "準備好就重新駛入車流"],
+  ['man', "Please drive forward into a bay of your choice.", "自己揀一個車位，車頭入泊"],
+  ['man', "Now reverse out of the bay.", "而家倒車出車位"],
+  ['man', "Please reverse into a bay of your choice.", "自己揀一個車位，倒車入泊"],
+  ['man', "Try to finish within the lines of the bay.", "盡量最後泊喺車位條線入面"],
+  ['man', "Pull up alongside that car, then reverse park behind it, within about two car lengths.", "喺嗰架車旁邊停，然後倒車平排泊喺佢後面（兩個車位長度內）"],
+  ['man', "Try to finish reasonably close to the kerb.", "最後盡量貼近路邊石"],
+
+  // 緊急停車
+  ['emg', "Shortly, I'll ask you to stop the car as in an emergency.", "等陣我會叫你做緊急停車"],
+  ['emg', "When I say 'Stop', stop the car as quickly and safely as you can.", "我講「Stop」嗰陣，要盡快又安全咁停車"],
+  ['emg', "I'll check behind before giving the signal.", "我會睇清楚後面先發指示"],
+  ['emg', "Stop!", "停車！（緊急停車）", "即刻用力踩剎車，同時踩離合，雙手揸穩軚盤。停定之後拉手掣、打空波。"],
+  ['emg', "Thank you. I won't ask you to do that exercise again.", "多謝，我唔會再叫你做呢個練習"],
+
+  // 獨立駕駛
+  ['ind', "Now I'd like you to follow the directions from the sat nav.", "而家我想你跟導航指示揸"],
+  ['ind', "I'll set the sat nav for you.", "我會幫你設定導航"],
+  ['ind', "Please follow the signs to the town centre.", "跟住去市中心嘅路牌揸"],
+  ['ind', "Follow the signs for the A30 until I give you further directions.", "跟住 A30 嘅路牌揸，直至我再俾指示"],
+  ['ind', "If you go the wrong way, don't worry. I'll help you get back on track.", "行錯路唔使擔心，我會幫你返回正確路線"],
+  ['ind', "If you're not sure, just ask me.", "唔肯定就問我"],
+  ['ind', "That's the end of the independent driving part.", "獨立駕駛部分完咗"],
+
+  // Tell me（開車前問）
+  ['tell', "Tell me how you'd check that the brakes are working before starting a journey.", "講吓出發前點樣檢查剎車係咪正常", "剎車唔應該有海綿感或者太鬆；起步之後輕踩試吓，架車唔應該拉向一邊。"],
+  ['tell', "Tell me where you'd find the information for the recommended tyre pressures for this car, and how tyre pressures should be checked.", "講吓喺邊度搵到建議胎壓，同埋點樣檢查胎壓", "睇車主手冊（或者門邊貼紙）。用可靠嘅胎壓計，喺冷胎時檢查，檢查完冚返氣嘴蓋。"],
+  ['tell', "Tell me how you make sure your head restraint is correctly adjusted, so it provides the best protection in the event of a crash.", "講吓點樣調校頭枕，撞車時先有最好保護", "頭枕嘅硬身部分要同眼睛或者耳朵頂部一樣高，盡量貼近後腦。"],
+  ['tell', "Tell me how you'd check the tyres to make sure they have enough tread depth, and that their general condition is safe to use on the road.", "講吓點樣檢查車胎嘅胎紋深度同整體狀況", "胎紋最少 1.6mm，要喺中間四分之三闊度、成條胎一圈都夠深。車胎側面唔可以有割痕或者凸起。"],
+  ['tell', "Tell me how you'd check that the headlights and tail lights are working.", "講吓點樣檢查頭燈同尾燈係咪正常", "開着燈（有需要就開匙），行出車外逐個睇。"],
+  ['tell', "Tell me how you'd know if there was a problem with your anti-lock braking system.", "講吓點樣知道 ABS 防鎖死剎車有問題", "如果儀表板上面 ABS 警告燈一直唔熄，即係有問題。"],
+  ['tell', "Tell me how you'd check that the direction indicators are working.", "講吓點樣檢查方向燈（燈號）係咪正常", "開死火燈（危險警告燈），行出車外逐個睇。"],
+  ['tell', "Tell me how you'd check that the brake lights are working on this car.", "講吓點樣檢查剎車燈係咪正常", "踩剎車，睇窗或者車房門嘅反射，或者叫人喺後面幫手睇。"],
+  ['tell', "Tell me how you'd check that the power-assisted steering is working before starting a journey.", "講吓出發前點樣檢查軚盤助力係咪正常", "發動引擎時輕輕撳住軚盤，會感覺到軚盤輕微郁；或者起步後扭軚，應該好輕鬆。"],
+  ['tell', "Tell me how you'd switch on the rear fog lights, and explain when you'd use them.", "講吓點樣開後霧燈，同埋幾時要用", "先開大燈，再撳後霧燈掣，儀表板會亮霧燈指示燈。能見度低過大約 100 米先用。"],
+  ['tell', "Tell me how you switch your headlight from dipped to main beam, and explain how you'd know the main beam is on.", "講吓點樣由低燈轉遠光燈，同埋點知遠光燈着咗", "推（或拉）燈桿轉遠光，儀表板會亮藍色遠光燈指示燈。"],
+  ['tell', "Open the bonnet and tell me how you'd check that the engine has sufficient oil.", "打開車頭蓋，講吓點樣檢查機油夠唔夠", "搵機油尺，抽出嚟抹乾淨再插返入去，再抽出睇油位係咪喺 min 同 max 之間。"],
+  ['tell', "Open the bonnet and tell me how you'd check that the engine has sufficient engine coolant.", "打開車頭蓋，講吓點樣檢查冷卻水夠唔夠", "睇水箱（冷卻水箱）上面嘅 min / max 刻度，水位要喺中間。"],
+  ['tell', "Open the bonnet and tell me how you'd check that you have a safe level of hydraulic brake fluid.", "打開車頭蓋，講吓點樣檢查剎車油嘅油位", "搵剎車油箱，睇油位係咪喺 min / max 刻度之間。"],
+
+  // Show me（揸緊車時問）
+  ['show', "When it's safe to do so, can you show me how you wash and clean the rear windscreen?", "安全嘅時候，示範點樣噴水洗後擋風玻璃", "揸穩車，用燈桿（通常係水撥桿）開後窗噴水同水撥。眼睇前面，唔好分心。"],
+  ['show', "When it's safe to do so, can you show me how you wash and clean the front windscreen?", "安全嘅時候，示範點樣噴水洗前擋風玻璃", "拉水撥桿開前窗噴水同水撥。"],
+  ['show', "When it's safe to do so, can you show me how you'd switch on your dipped headlights?", "安全嘅時候，示範點樣開低燈（近光燈）", "扭燈掣去低燈位置，儀表板會亮綠色燈號。"],
+  ['show', "When it's safe to do so, can you show me how you'd set the rear demister?", "安全嘅時候，示範點樣開後窗除霧", "撳後窗除霧掣（長方形加波浪線嘅圖案）。"],
+  ['show', "When it's safe to do so, can you show me how you'd operate the horn?", "安全嘅時候，示範點樣響喇叭", "撳軚盤中間響一下。"],
+  ['show', "When it's safe to do so, can you show me how you'd demist the front windscreen?", "安全嘅時候，示範點樣幫前擋風玻璃除霧", "開風扇吹向擋風玻璃（扇形圖案），可以開冷氣同調高溫度幫手。"],
+  ['show', "When it's safe to do so, can you show me how you'd open and close the side window?", "安全嘅時候，示範點樣開同關側窗", "撳車門上面嘅電窗掣，開少少再關返。"],
+
+  // 常用詞彙
+  ['vocab', "kerb", "路邊石（行人路邊）"],
+  ['vocab', "junction", "路口"],
+  ['vocab', "roundabout", "迴旋處"],
+  ['vocab', "exit", "出口"],
+  ['vocab', "lane", "行車線"],
+  ['vocab', "lay-by", "路旁停車處"],
+  ['vocab', "dual carriageway", "雙程分隔公路"],
+  ['vocab', "give way", "讓路"],
+  ['vocab', "bay", "停車位"],
+  ['vocab', "car length", "一架車嘅長度"],
+  ['vocab', "dipped headlights", "低燈（近光燈）"],
+  ['vocab', "main beam", "遠光燈"],
+  ['vocab', "parking brake", "手掣（手剎）"],
+  ['vocab', "bonnet", "車頭蓋（引擎蓋）"],
+  ['vocab', "windscreen", "擋風玻璃"],
+  ['vocab', "demister", "除霧器"],
+  ['vocab', "indicator", "方向燈（燈號）"],
+  ['vocab', "blind spot", "盲點"],
+  ['vocab', "pedestrian crossing", "行人過路處"],
+  ['vocab', "sat nav", "衛星導航"],
+  ['vocab', "minor fault", "輕微錯誤（最多 15 個）"],
+  ['vocab', "serious fault", "嚴重錯誤（一個就唔合格）"],
+].map(([cat, en, zh, tip]) => ({ cat, en, zh, tip }));
+
+// ---------- storage (per-viewer convenience only) ----------
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+const wrong = new Set(store.get('ukdt.wrong', []));
+const saveWrong = () => { store.set('ukdt.wrong', [...wrong]); $('#wrongCount').textContent = wrong.size; };
+
+const state = {
+  mode: store.get('ukdt.mode', 'practice'),
+  cat: store.get('ukdt.cat', 'all'),
+  slow: store.get('ukdt.slow', false),
+  showEn: store.get('ukdt.showEn', false),
+  voiceURI: store.get('ukdt.voice2', 'rec'),
+  deck: [], idx: 0, answered: false, unlocked: false,
+  score: 0, total: 0, streak: 0,
+};
+
+const $ = s => document.querySelector(s);
+const catName = id => CATS.find(c => c.id === id).name;
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+// ---------- speech ----------
+const hasTTS = 'speechSynthesis' in window;
+const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+let voices = [];
+function loadVoices() {
+  if (!hasTTS) return;
+  // macOS novelty voices (singing, robotic, whispering) are useless for listening practice
+  const novelty = /^(Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Deranged|Good News|Hysterical|Jester|Junior|Organ|Pipe Organ|Princess|Ralph|Superstar|Trinoids|Whisper|Wobble|Zarvox|Fred|Kathy)\b/i;
+  // Siri voices show up in the list on iOS but stay silent when a web page asks for them
+  voices = speechSynthesis.getVoices().filter(v => /^en[-_]/i.test(v.lang) && !novelty.test(v.name) && !/siri/i.test(v.voiceURI + v.name));
+  const rank = v => (/en[-_]GB/i.test(v.lang) ? 0 : 10) + (v.localService === false ? 2 : 0) + (/google|daniel|serena|kate/i.test(v.name) ? 0 : 1);
+  voices.sort((a, b) => rank(a) - rank(b));
+  const sel = $('#voice');
+  // iPhone / iPad Safari plays built-in voices silently from a web page, so only offer the recording there
+  if (isIOS) {
+    sel.innerHTML = '<option value="rec">錄音：Daniel 英國男聲（推薦）</option>';
+    sel.value = 'rec';
+    if (state.voiceURI !== 'rec') { state.voiceURI = 'rec'; store.set('ukdt.voice2', 'rec'); }
+    $('#diag').textContent = 'iPhone / iPad 只提供錄音聲，因為部機自帶嘅聲喺網頁度播唔到。';
+    updateVoiceHint();
+    return;
+  }
+  sel.innerHTML = '<optgroup label="錄音（最穩陣）"><option value="rec">錄音：Daniel 英國男聲（推薦）</option></optgroup>' +
+    '<optgroup label="部機自帶（有啲手機可能冇聲）"><option value="">系統預設英國口音</option>' +
+    voices.map(v => `<option value="${esc(v.voiceURI)}">${esc(v.name)} (${v.lang})</option>`).join('') + '</optgroup>';
+  sel.value = state.voiceURI === '' || voices.some(v => v.voiceURI === state.voiceURI) ? state.voiceURI : 'rec';
+  $('#diag').textContent = `偵測到 ${voices.length} 把英文聲`;
+  updateVoiceHint();
+}
+function updateVoiceHint() { $('#voiceHint').hidden = $('#voice').value === 'rec'; }
+// Pre-recorded clips (audio/<fnv1a hash of the English text>.mp4). iPhone Safari often plays
+// speechSynthesis silently, but a normal audio file always works after a tap.
+const clip = new Audio();
+clip.preload = 'auto';
+const clipName = t => { let h = 0x811c9dc5; for (const ch of t) { h ^= ch.charCodeAt(0); h = Math.imul(h, 0x01000193) >>> 0; } return h.toString(16).padStart(8, '0'); };
+function playClip(text, btn) {
+  if (hasTTS) speechSynthesis.cancel();
+  document.querySelectorAll('.speaking').forEach(el => el.classList.remove('speaking'));
+  const done = () => { if (btn) btn.classList.remove('speaking'); };
+  if (btn) btn.classList.add('speaking');
+  clip.onended = done;
+  clip.onplaying = () => { $('#audioHelp').hidden = true; };
+  clip.onerror = () => { done(); speak(text, btn, false, true); };
+  clip.src = `audio/${clipName(text)}.mp4`;
+  clip.defaultPlaybackRate = clip.playbackRate = state.slow ? 0.75 : 1;
+  clip.preservesPitch = true;
+  clip.play().catch(err => { done(); if (err.name !== 'AbortError') $('#audioHelp').hidden = false; });
+}
+let currentUtterance = null; // keep a reference: some mobile browsers drop utterances that get garbage-collected
+let watchdog = 0;
+function speak(text, btn, forceDefault = false, noClip = false) {
+  if (!noClip && $('#voice').value === 'rec') return playClip(text, btn);
+  clip.pause();
+  if (!hasTTS) { $('#audioHelp').hidden = false; return; }
+  const go = () => {
+    const u = new SpeechSynthesisUtterance(text);
+    // Blank choice = let the phone pick its own en-GB voice, which is the most reliable path on iPhone
+    const v = forceDefault || noClip ? null : voices.find(v => v.voiceURI === $('#voice').value);
+    if (v) u.voice = v;
+    u.lang = v ? v.lang : 'en-GB';
+    u.rate = state.slow ? 0.7 : 0.95;
+    u.volume = 1;
+    currentUtterance = u;
+    let started = false;
+    document.querySelectorAll('.speaking').forEach(el => el.classList.remove('speaking'));
+    const done = () => { if (btn) btn.classList.remove('speaking'); };
+    if (btn) btn.classList.add('speaking');
+    u.onstart = () => { started = true; $('#audioHelp').hidden = true; };
+    u.onend = done;
+    u.onerror = e => { done(); if (e.error !== 'interrupted' && e.error !== 'canceled') $('#audioHelp').hidden = false; };
+    speechSynthesis.speak(u);
+    if (speechSynthesis.paused) speechSynthesis.resume();
+    clearTimeout(watchdog);
+    watchdog = setTimeout(() => { if (!started && currentUtterance === u) { done(); $('#audioHelp').hidden = false; } }, 3000);
+  };
+  // Speaking straight after cancel() is silently dropped on iOS Safari and Android Chrome, so wait a beat
+  if (speechSynthesis.speaking || speechSynthesis.pending) { speechSynthesis.cancel(); setTimeout(go, 120); }
+  else go();
+}
+
+// ---------- practice ----------
+function pool() {
+  let p = CARDS.filter(c => state.cat === 'all' || c.cat === state.cat);
+  if (state.mode === 'wrong') p = p.filter(c => wrong.has(c.en));
+  return p;
+}
+function newDeck() { state.deck = shuffle(pool()); state.idx = 0; }
+
+function renderQuestion() {
+  const card = state.deck[state.idx];
+  state.answered = false;
+  $('#feedback').hidden = true;
+  $('#qNo').textContent = state.idx + 1;
+  $('#qTotal').textContent = state.deck.length;
+  $('#qCat').textContent = catName(card.cat);
+  const t = $('#qText');
+  if (state.showEn) { t.textContent = card.en; t.classList.remove('hidden'); }
+  else { t.textContent = '撳播放，聽考官講咩'; t.classList.add('hidden'); }
+
+  const same = shuffle(CARDS.filter(c => c.cat === card.cat && c.zh !== card.zh));
+  const other = shuffle(CARDS.filter(c => c.cat !== card.cat));
+  const opts = shuffle([card, ...same.concat(other).slice(0, 3)]);
+  $('#options').innerHTML = opts.map((o, i) =>
+    `<button class="opt" data-zh="${esc(o.zh)}"><span class="k">${i + 1}</span><span>${esc(o.zh)}</span></button>`).join('');
+  if (state.unlocked) speak(card.en, $('#play'));
+}
+
+function answer(btn) {
+  if (state.answered) return;
+  state.answered = true;
+  const card = state.deck[state.idx];
+  const ok = btn.dataset.zh === card.zh;
+  document.querySelectorAll('.opt').forEach(b => {
+    b.disabled = true;
+    if (b.dataset.zh === card.zh) b.classList.add('right');
+    else if (b === btn) b.classList.add('wrong');
+    else b.classList.add('dim');
+  });
+  state.total++;
+  if (ok) { state.score++; state.streak++; if (state.mode === 'wrong') wrong.delete(card.en); }
+  else { state.streak = 0; wrong.add(card.en); }
+  saveWrong();
+  $('#score').textContent = state.score; $('#answered').textContent = state.total; $('#streak').textContent = state.streak;
+
+  const t = $('#qText'); t.textContent = card.en; t.classList.remove('hidden');
+  const v = $('#verdict');
+  v.textContent = ok ? '答啱！' : '答錯，已加入錯題';
+  v.className = 'verdict ' + (ok ? 'ok' : 'no');
+  $('#fbText').innerHTML = `<div class="en" style="font-weight:700">${esc(card.en)}</div><div>${esc(card.zh)}</div>`;
+  const tip = $('#fbTip');
+  tip.hidden = !card.tip;
+  if (card.tip) tip.querySelector('span').textContent = card.tip;
+  $('#next').textContent = state.idx + 1 >= state.deck.length ? '全部做完，再嚟一輪 ↻' : '下一題 →';
+  $('#feedback').hidden = false;
+  $('#next').focus({ preventScroll: true });
+  if (state.mode === 'wrong') updateTabs();
+}
+
+function nextQ() {
+  state.idx++;
+  if (state.idx >= state.deck.length) newDeck();
+  if (!state.deck.length) return render();
+  renderQuestion();
+}
+
+// ---------- browse ----------
+const PLAY_SVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L7.5 3.64A1 1 0 0 0 6 4.5Z"/></svg>';
+function renderBrowse() {
+  const q = $('#search').value.trim().toLowerCase();
+  const items = CARDS.filter(c => (state.cat === 'all' || c.cat === state.cat) &&
+    (!q || c.en.toLowerCase().includes(q) || c.zh.includes(q) || (c.tip || '').includes(q)));
+  let html = '', last = '';
+  items.forEach(c => {
+    if (c.cat !== last) { html += `<div class="group-h">${catName(c.cat)}</div>`; last = c.cat; }
+    html += `<div class="row"><button class="mini" data-en="${esc(c.en)}" aria-label="播放">${PLAY_SVG}</button><div>
+      <div class="en">${esc(c.en)}${wrong.has(c.en) ? '<span class="star">錯過</span>' : ''}</div>
+      <div class="zh">${esc(c.zh)}</div>${c.tip ? `<div class="tip"><b>點樣答／做</b>${esc(c.tip)}</div>` : ''}</div></div>`;
+  });
+  $('#list').innerHTML = html || '<div class="empty">搵唔到相關句子。</div>';
+}
+
+// ---------- shell ----------
+function updateTabs() {
+  document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.mode === state.mode));
+  $('#wrongCount').textContent = wrong.size;
+}
+function renderChips() {
+  $('#chips').innerHTML = CATS.map(c => `<button data-cat="${c.id}" aria-pressed="${c.id === state.cat}">${c.name}</button>`).join('');
+}
+function render() {
+  updateTabs(); renderChips();
+  const browse = state.mode === 'browse';
+  $('#browse').hidden = !browse;
+  if (browse) { $('#practice').hidden = true; $('#noWrong').hidden = true; renderBrowse(); return; }
+  newDeck();
+  const empty = !state.deck.length;
+  $('#practice').hidden = empty;
+  $('#noWrong').hidden = !empty;
+  $('#noWrong').textContent = state.mode === 'wrong'
+    ? (wrong.size ? '呢個類別冇錯題。揀「全部」睇晒所有錯題。' : '未有錯題。去「練習」答錯嘅題目會自動收喺呢度。')
+    : '呢個類別冇題目。';
+  if (!empty) renderQuestion();
+}
+
+document.querySelector('.tabs').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  state.mode = b.dataset.mode; store.set('ukdt.mode', state.mode); render();
+});
+$('#chips').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  state.cat = b.dataset.cat; store.set('ukdt.cat', state.cat); render();
+});
+$('#play').addEventListener('click', () => { state.unlocked = true; speak(state.deck[state.idx].en, $('#play')); });
+$('#options').addEventListener('click', e => { const b = e.target.closest('.opt'); if (b) { state.unlocked = true; answer(b); } });
+$('#next').addEventListener('click', nextQ);
+$('#slow').addEventListener('click', e => { state.slow = !state.slow; store.set('ukdt.slow', state.slow); e.currentTarget.setAttribute('aria-pressed', state.slow); });
+$('#showEn').addEventListener('click', e => {
+  state.showEn = !state.showEn; store.set('ukdt.showEn', state.showEn); e.currentTarget.setAttribute('aria-pressed', state.showEn);
+  if (!state.answered && state.deck.length) {
+    const t = $('#qText'), c = state.deck[state.idx];
+    if (state.showEn) { t.textContent = c.en; t.classList.remove('hidden'); } else { t.textContent = '撳播放，聽考官講咩'; t.classList.add('hidden'); }
+  }
+});
+$('#list').addEventListener('click', e => { const b = e.target.closest('.mini'); if (b) speak(b.dataset.en, b); });
+$('#search').addEventListener('input', renderBrowse);
+$('#voice').addEventListener('change', e => { state.voiceURI = e.target.value; store.set('ukdt.voice2', state.voiceURI); updateVoiceHint(); speak('Take the next road on the left, please.'); });
+$('#backToRec').addEventListener('click', () => { $('#voice').value = 'rec'; state.voiceURI = 'rec'; store.set('ukdt.voice2', 'rec'); updateVoiceHint(); speak('Take the next road on the left, please.'); });
+$('#testSound').addEventListener('click', () => { $('#voice').value = 'rec'; state.voiceURI = 'rec'; store.set('ukdt.voice2', 'rec'); speak('Take the next road on the left, please.'); });
+$('#resetWrong').addEventListener('click', () => { wrong.clear(); saveWrong(); $('#resetMsg').hidden = false; setTimeout(() => $('#resetMsg').hidden = true, 2500); render(); });
+document.addEventListener('keydown', e => {
+  if (state.mode === 'browse' || e.target.matches('input, select')) return;
+  if (/^[1-4]$/.test(e.key)) { const b = document.querySelectorAll('.opt')[+e.key - 1]; if (b) { state.unlocked = true; answer(b); } }
+  else if (e.key === ' ') { e.preventDefault(); if (state.deck.length) { state.unlocked = true; speak(state.deck[state.idx].en, $('#play')); } }
+  else if (e.key === 'Enter' && state.answered && document.activeElement !== $('#next')) nextQ();
+});
+
+// ---------- guide ----------
+const CAT_DESC = {
+  start: '睇駕駛執照、讀車牌（視力測試）、公佈合唔合格',
+  dir: '邊個路口轉左轉右、迴旋處第幾個出口、轉線',
+  stop: '靠左停、斜角起步、斜路起步',
+  man: '右邊停車再倒後兩個車位、車頭入泊、倒車入泊、平排泊車',
+  emg: '緊急停車，包括 "Stop!"',
+  ind: '跟導航、跟路牌',
+  tell: '開車前問，每題附中文「點樣答／做」提示',
+  show: '揸緊車時問，每題附中文「點樣答／做」提示',
+  vocab: 'kerb、bay、dipped headlights、minor / serious fault 等',
+};
+$('#gTotal').textContent = CARDS.length;
+$('#gCats').innerHTML = CATS.filter(c => c.id !== 'all').map(c =>
+  `<li><b>${c.name}</b> <span class="n">(${CARDS.filter(x => x.cat === c.id).length})</span>：${esc(CAT_DESC[c.id])}</li>`).join('');
+const guide = $('#guide');
+guide.open = store.get('ukdt.guideOpen', true);
+guide.addEventListener('toggle', () => store.set('ukdt.guideOpen', guide.open));
+
+$('#slow').setAttribute('aria-pressed', state.slow);
+$('#showEn').setAttribute('aria-pressed', state.showEn);
+if (!hasTTS) $('#diag').textContent = '呢部機冇內置發聲，會用錄音播放';
+else { loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+render();
+</script>
+
+</body>
+</html>
